@@ -1,0 +1,4 @@
+psycopg2
+sshtunnel
+cloud-sql-python-connector 
+psycopg2-binary
