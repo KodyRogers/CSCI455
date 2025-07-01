@@ -9,7 +9,7 @@ from psycopg2.extras import RealDictCursor
 
 def action(curs: RealDictCursor, state, firstname, lastname, l4ssn):
     curs.execute(f'''
-        SELECT * FROM postgres.csci455.voters WHERE first_name = '{firstname}' AND last_name = '{lastname}';
+        SELECT * FROM postgres.public.voters WHERE first_name = '{firstname}' AND last_name = '{lastname}';
     ''')
     out = curs.fetchall()
     print(out)

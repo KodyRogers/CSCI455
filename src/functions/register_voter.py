@@ -23,7 +23,7 @@ def action(curs: RealDictCursor, state, fname, mname, lname, ssn, party):
                 return False
 
         curs.execute(f'''
-                SELECT * FROM postgres.csci455.voters WHERE ssn = '{ssn}';
+                SELECT * FROM postgres.public.voters WHERE ssn = '{ssn}';
                      ''')
         out = curs.fetchall()
         #print(out)      #used for testing output
@@ -31,7 +31,7 @@ def action(curs: RealDictCursor, state, fname, mname, lname, ssn, party):
         if (len(out) != 0):
                 print("This SSN is already in use!")
         else:
-                curs.execute("INSERT INTO postgres.csci455.voters (first_name, middle_name, last_name, ssn, registered_at, party)" +
+                curs.execute("INSERT INTO postgres.public.voters (first_name, middle_name, last_name, ssn, registered_at, party)" +
                             " VALUES (%s, %s, %s, %s, NOW(), %s)", (fname, mname, lname, ssn, party) ) 
                 print(f"{fname} has been registered to vote!")
                 return True
