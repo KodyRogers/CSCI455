@@ -1,3 +1,10 @@
+###############################################
+# Author: Kody Rogers
+# Date: 6/27/2025
+# Description: logs the user in
+# Version: 1.0
+###############################################
+
 from psycopg2.extras import RealDictCursor
 
 def action(curs: RealDictCursor, state, firstname, lastname, l4ssn):
@@ -5,7 +12,7 @@ def action(curs: RealDictCursor, state, firstname, lastname, l4ssn):
         SELECT * FROM postgres.csci455.people WHERE first_name = '{firstname}' AND last_name = '{lastname}';
     ''')
     out = curs.fetchall()
-    #print(out)
+    print(out)
     #print(f'you tried to login with {firstname}, {l4ssn}')
 
     if len(out) == 0:

@@ -8,5 +8,5 @@
 from psycopg2.extras import RealDictCursor
 
 def action(curs: RealDictCursor, state, username, fname, lname, password, email):
-
+        print(state["user"])
         pass
