@@ -1,7 +1,7 @@
 ###############################################
 # Author: Kody Rogers
 # Date: 6/30/2025
-# Description: logs the user in
+# Description: logs the admin user in
 # Version: 1.0
 ###############################################
 

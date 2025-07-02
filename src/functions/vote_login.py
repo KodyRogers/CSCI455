@@ -22,7 +22,7 @@ def action(curs: RealDictCursor, state, firstname, lastname, l4ssn):
         SELECT * FROM postgres.public.voters WHERE first_name = '{firstname}' AND last_name = '{lastname}';
     ''')
     out = curs.fetchall()
-    print(out) #Used for testing
+    #print(out) #Used for testing
     #print(f'you tried to login with {firstname}, {l4ssn}')
 
     if len(out) == 0:

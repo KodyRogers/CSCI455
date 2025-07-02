@@ -1,7 +1,7 @@
 ###############################################
 # Author: Kody Rogers
 # Date: 6/27/2025
-# Description: adds a new user to the database
+# Description: adds a new voter to the database
 # Version: 1.0
 ###############################################
 
