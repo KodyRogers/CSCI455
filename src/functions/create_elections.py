@@ -21,8 +21,6 @@ def action(curs: RealDictCursor, state: dict, electionName, date, electionType):
     ''')
 
     out = curs.fetchall()
-    print("test")
-
     if (len(out) != 0):
         print("A election with this name already exist!")
         return False
