@@ -1,32 +1,32 @@
 ###############################################
 # Author: Kody Rogers
-# Date: 6/27/2025
+# Date: 6/30/2025
 # Description: logs the user in
 # Version: 1.0
 ###############################################
 
 from psycopg2.extras import RealDictCursor
 
-def action(curs: RealDictCursor, state, firstname, lastname, l4ssn):
+def action(curs: RealDictCursor, state, username, password):
+
 
     if state.get('user') != None:
         print('Currently logged in')
         return False
 
     curs.execute(f'''
-        SELECT * FROM postgres.public.voters WHERE first_name = '{firstname}' AND last_name = '{lastname}';
+        SELECT * FROM postgres.public.admins WHERE username = '{username}' AND password = '{password}';
     ''')
     out = curs.fetchall()
     print(out)
-    #print(f'you tried to login with {firstname}, {l4ssn}')
 
     if len(out) == 0:
-        print(f'Incorrect Name')
-    elif l4ssn != out[0]['ssn'][-4:]:
-        print(f'Incorrect SSN digits')
+        print(f'Incorrect username')
+    elif password != out[0]['password']:
+        print(f'Incorrect password')
     else:
         # success
-        print(f"Successfully logged in as: '{firstname} {lastname}'")
+        print(f"Successfully logged in as: '{username}'")
         state['user'] = out[0]
 
         # return true to commit changes

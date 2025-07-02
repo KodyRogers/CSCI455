@@ -1,34 +1,44 @@
 ###############################################
-# Author: Johnathan Green
+# Author: Johnathan Green & Kody Rogers
 # Date: 7/01/2025
-# Description: displays all elections and candidates
-# Version: 1.0
+# Description: displays all running elections + past elections
+# Version: 1.1
 ###############################################
 
 from psycopg2.extras import RealDictCursor
 
 def action(curs: RealDictCursor, state: dict):
-  if state.get('user') == None:
-    print('Not currently logged in')
-    return False
+  
   
   curs.execute('''
-      SELECT * FROM postgres.public.elections
+      SELECT * FROM postgres.public.elections WHERE DATE > CURRENT_DATE
   ''')
 
+  print("Ongoing Elections")
+  print("=================")
+
   elections = curs.fetchall()
-  print(curs.fetchall())
-  for row in elections:
-    election_id = row[0]
-    print(f"{row[1]} on {row[2]} [{row[3]}]")
-    curs.execute(f'''
-        SELECT name, party, position FROM postgres.public.candidates WHERE election_id = {election_id}
-    ''')
-    candidates = curs.fetchall()
-    for candidate in candidate:
-      print(f"\t{candidate[0]} ({candidate[1]} - {candidate[2]})")
+  if (len(elections) == 0):
+    print("Could not find any running elections")
+  else:
+    for row in elections:
+      print(f"Election Name: {row['name']}, Status Ongoing Until: {row['date']}, Election Type: {row['type']}")
+      
+  curs.execute('''
+      SELECT * FROM postgres.public.elections WHERE DATE < CURRENT_DATE
+  ''')
+  elections = curs.fetchall()
 
+  print("\nPast Elections")
+  print("=================")
 
+  elections = curs.fetchall()
+  if (len(elections) == 0):
+    print("Could not find any past elections")
+  else:
+    for row in elections:
+      print(f"Election Name: {row['name']}, Status Ongoing Until: {row['date']}, Election Type: {row['type']}")
 
+  return False
 #SELECT name, party, position FROM candidates WHERE election_id = 1
 #SELECT * FROM postgres.csci455.elections
