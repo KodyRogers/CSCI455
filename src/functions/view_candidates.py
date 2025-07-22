@@ -38,6 +38,6 @@ def action(curs: RealDictCursor, state: dict, electionName):
             SELECT * FROM postgres.public.voters WHERE voter_id = '{candidate}';
         ''')
         candidateInfo = curs.fetchone()
-        print(f"Name: {candidateInfo['first_name']} {candidateInfo['middle_name'][0]} {candidateInfo['last_name']}, Party: {candidateInfo['party']}")
+        print(f"CandidateID: {candidateInfo["voter_id"]}, Name: {candidateInfo['first_name']} {candidateInfo['middle_name'][0]} {candidateInfo['last_name']}, Party: {candidateInfo['party']}")
 
     return False  
