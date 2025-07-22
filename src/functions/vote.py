@@ -1,3 +1,4 @@
+from datetime import date
 from psycopg2.extras import RealDictCursor
 
 def action(curs: RealDictCursor, state, electionName, candidateID):
@@ -18,6 +19,13 @@ def action(curs: RealDictCursor, state, electionName, candidateID):
     out = curs.fetchone()
     if (out == None):
         print("This election does not exist!")
+        return False
+    
+    # Checks if election has ended
+    electionDate = out['date']
+    electionDate = electionDate.strftime("%Y-%m-%d")
+    if(electionDate < date.today()):
+        print("This election has already ended!")
         return False
     
     electionID = out['election_id']
