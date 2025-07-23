@@ -1,3 +1,10 @@
+###############################################
+# Author: Kody Rogers
+# Date: 7/22/2025
+# Description: Votes 
+# Version: 1.0
+###############################################
+
 from datetime import date
 from psycopg2.extras import RealDictCursor
 

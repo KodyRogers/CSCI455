@@ -1,22 +1,22 @@
 ###############################################
-# Author: Johnathan Green 
+# Author: Johnathan Green + Kody Rogers
 # Date: 7/22/2025
-# Description: 
-# Version: 1.0
+# Description: Gets the Results of a finished Election
+# Version: 1.1
 ###############################################
 
 from psycopg2.extras import RealDictCursor
 
-def action(curs: RealDictCursor, state, electionName, candidateID):
+def action(curs: RealDictCursor, state, electionName):
 
     if state['user'] == None:
         print("You are currently not logged in!")
         return False
-    userID = state['user']['voter_id']
+    
 
     # Gets the ElectionID to be used in voting
-    curs.execute(f'''a
-        SELECT election_id FROM postgres.public.elections WHERE name = '{electionName}';
+    curs.execute(f'''
+        SELECT * FROM postgres.public.elections WHERE name = '{electionName}';
     ''')
     out = curs.fetchone()
     if (out == None):
