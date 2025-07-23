@@ -24,10 +24,9 @@ def action(curs: RealDictCursor, state, electionName, candidateID):
         return False
     
     # Checks if election has ended
-    electionDate = out['date']
-    electionDate = electionDate.strftime("%Y-%m-%d")
-    if(electionDate > date.today()):
-        print("This election is still ongoing")
+    electionActive = out['is_active']
+    if(electionActive):
+        print("This election has not ended yet")
         return False
     
     election_id = out['election_id']
