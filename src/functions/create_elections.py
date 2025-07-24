@@ -29,5 +29,5 @@ def action(curs: RealDictCursor, state: dict, electionName, date, electionType):
     curs.execute("INSERT INTO postgres.public.elections (name, date, type)" +
                  " Values (%s, %s, %s)", (electionName, date, electionType))
     
-    print(f"Election {electionName} has been added successfully!")
+    print(f"Election '{electionName}' has been added successfully!")
     return True

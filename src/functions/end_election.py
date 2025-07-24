@@ -29,7 +29,7 @@ def action(curs: RealDictCursor, state, electionName):
     election_id = out['election_id']
 
     curs.execute(f'''
-        UPDATE elections SET is_active = FALSE WHERE election_id = {election_id};
+        UPDATE elections SET is_active = FALSE WHERE election_id = '{election_id}';
     ''')
-    print(f"The Election: {electionName} is now closed!")
+    print(f"The Election: '{electionName}' is now closed!")
     return True

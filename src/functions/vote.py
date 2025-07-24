@@ -21,7 +21,7 @@ def action(curs: RealDictCursor, state, electionName, candidateID):
 
     # Gets the ElectionID to be used in voting
     curs.execute(f'''
-        SELECT election_id FROM postgres.public.elections WHERE name = '{electionName}';
+        SELECT * FROM postgres.public.elections WHERE name = '{electionName}';
     ''')
     out = curs.fetchone()
     if (out == None):

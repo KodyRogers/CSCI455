@@ -18,7 +18,6 @@ def action(curs: RealDictCursor, state, username, password):
         SELECT * FROM postgres.public.admins WHERE username = '{username}' AND password = '{password}';
     ''')
     out = curs.fetchall()
-    print(out)
 
     if len(out) == 0:
         print(f'Incorrect username')

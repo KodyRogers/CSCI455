@@ -9,9 +9,12 @@ from psycopg2.extras import RealDictCursor
 
 def action(curs: RealDictCursor, state, fname, mname, lname, ssn, party):
 
-        if state.get('user') != None:
-                user = state["user"]["first_name"]
-                print(f"You are already signed in as {user}")
+        if state.get('user') == None:
+                print("You have not logged in yet!")
+                return False
+
+        if (state['user']['is_admin'] == False):
+                print("You are not signed in as an admin!")
                 return False
         
         if len(ssn) != 11:
@@ -31,8 +34,14 @@ def action(curs: RealDictCursor, state, fname, mname, lname, ssn, party):
         if (len(out) != 0):
                 print("This SSN is already in use!")
         else:
-                curs.execute("INSERT INTO postgres.public.voters (first_name, middle_name, last_name, ssn, registered_at, party)" +
-                            " VALUES (%s, %s, %s, %s, NOW(), %s)", (fname, mname, lname, ssn, party) ) 
+                
+                curs.execute(f'''
+                        SELECT MAX(voter_id) FROM postgres.public.voters;
+                ''')
+                next_id = curs.fetchone()['max'] + 1
+        
+                curs.execute("INSERT INTO postgres.public.voters (voter_id, first_name, middle_name, last_name, ssn, registered_at, party)" +
+                            " VALUES (%s, %s, %s, %s, %s, NOW(), %s)", (next_id, fname, mname, lname, ssn, party) ) 
                 print(f"{fname} has been registered to vote!")
                 return True
 
