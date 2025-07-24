@@ -34,7 +34,8 @@ def action(curs: RealDictCursor, state, firstname, lastname, l4ssn):
                 state['user'] = row
                 # return true to commit changes
                 return True
-            print("incorrect ssn digits")
+            
 
+    print("incorrect ssn digits")
     # Don't commit anything on incorrect login
     return False
